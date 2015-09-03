@@ -8,6 +8,7 @@
 <li><a href="ProcessAdmin">View Users' Orders</a></li>
 <li><a href="LoginSignup?logout=true">Logout</a></li>
 <% } else { %>
+<li><a href="ShowHistOrders">View Historical Orders</a></li>
 <li><a href="ShoppingCart.jsp">View Cart</a></li>
 <li><a href="LoginSignup?logout=true">Logout</a></li>
 <% } %>
