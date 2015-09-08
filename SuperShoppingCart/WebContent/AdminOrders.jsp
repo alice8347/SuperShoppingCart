@@ -1,6 +1,7 @@
 <jsp:include page="includes/header.jsp"/>
 <div>
 <ul class="nav navbar-nav navbar-right">
+<li><a href="AdminCredits.jsp">Issue Credits</a></li>
 <li><a href="LoginSignup?logout=true">Logout</a></li>
 </ul>
 </div>

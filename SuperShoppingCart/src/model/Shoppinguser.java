@@ -20,6 +20,8 @@ public class Shoppinguser implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SHOPPINGUSERS_ID_GENERATOR")
 	private long id;
 
+	private double credits;
+
 	private String email;
 
 	private String password;
@@ -41,6 +43,14 @@ public class Shoppinguser implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public double getCredits() {
+		return this.credits;
+	}
+
+	public void setCredits(double credits) {
+		this.credits = credits;
 	}
 
 	public String getEmail() {

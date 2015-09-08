@@ -20,7 +20,7 @@ public class Cart implements Serializable {
 	private long id;
 
 	private int ordered;
-
+	
 	private long pid;
 
 	private String pname;
@@ -60,7 +60,7 @@ public class Cart implements Serializable {
 	public void setOrdered(int ordered) {
 		this.ordered = ordered;
 	}
-
+	
 	public long getPid() {
 		return this.pid;
 	}

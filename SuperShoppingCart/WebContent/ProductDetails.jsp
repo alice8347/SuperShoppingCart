@@ -6,6 +6,7 @@
 <li><a href="Login.jsp">Login</a></li>
 <% } else if (((String) session.getAttribute("email")).equals("Admin")){ %>
 <li><a href="ProcessAdmin">View Users' Orders</a></li>
+<li><a href="AdminCredits.jsp">Issue Credits</a></li>
 <li><a href="LoginSignup?logout=true">Logout</a></li>
 <% } else {%>
 <li><a href="ShowHistOrders">View Historical Orders</a></li>

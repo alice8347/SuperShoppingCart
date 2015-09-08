@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Cart;
+import model.Shoppinguser;
 
 /**
  * Servlet implementation class ProcessAdmin
@@ -16,6 +17,7 @@ import model.Cart;
 public class ProcessAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String adminMsg;
+	private String creditMsg;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -23,6 +25,7 @@ public class ProcessAdmin extends HttpServlet {
     public ProcessAdmin() {
         super();
         adminMsg = "";
+        creditMsg = "";
     }
 
 	/**
@@ -50,7 +53,21 @@ public class ProcessAdmin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		creditMsg = "";
+		if (request.getParameter("issueCredits") != null) {
+			long userId = Long.parseLong(request.getParameter("userId"));
+			if (UserDB.selectByUserId(userId) == null) {
+				creditMsg += "<script type=\"text/javascript\">validateUserId()</script>";
+				request.setAttribute("creditMsg", creditMsg);
+				getServletContext().getRequestDispatcher("/AdminCredits.jsp").forward(request, response);
+			} else {
+				Shoppinguser user = UserDB.selectByUserId(userId);
+				double credits = 0.0;
+				credits = Double.parseDouble(request.getParameter("credits"));
+				user.setCredits(credits);
+				UserDB.update(user);
+			}
+		}
 	}
 
 }
