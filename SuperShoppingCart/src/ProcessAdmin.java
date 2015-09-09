@@ -62,10 +62,13 @@ public class ProcessAdmin extends HttpServlet {
 				getServletContext().getRequestDispatcher("/AdminCredits.jsp").forward(request, response);
 			} else {
 				Shoppinguser user = UserDB.selectByUserId(userId);
-				double credits = 0.0;
-				credits = Double.parseDouble(request.getParameter("credits"));
+				double credits = user.getCredits();
+				credits += Double.parseDouble(request.getParameter("credits"));
 				user.setCredits(credits);
 				UserDB.update(user);
+				creditMsg += "<div class=\"container\"><div class=\"alert alert-success\"><strong>Success!</strong> The credits were issued successfully.</div></div>";
+				request.setAttribute("creditMsg", creditMsg);
+				getServletContext().getRequestDispatcher("/AdminCredits.jsp").forward(request, response);
 			}
 		}
 	}

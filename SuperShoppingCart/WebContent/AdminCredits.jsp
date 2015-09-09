@@ -22,7 +22,7 @@ function validateUserId() {
 </script>
 
 <div class="container">
-<h3>Login</h3>
+<h3>Issue Credits</h3>
 <br />
 <form class="form-horizontal" role="form" name="creditForm" id="creditForm" onsubmit="return validateForm()" action="ProcessAdmin" method="post">
 <div class="form-group">
