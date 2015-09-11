@@ -34,6 +34,10 @@ public class Shoppinguser implements Serializable {
 	@OneToMany(mappedBy="shoppinguser")
 	private List<Comment> comments;
 
+	//bi-directional many-to-one association to Card
+	@OneToMany(mappedBy="shoppinguser")
+	private List<Card> cards;
+
 	public Shoppinguser() {
 	}
 
@@ -111,6 +115,28 @@ public class Shoppinguser implements Serializable {
 		comment.setShoppinguser(null);
 
 		return comment;
+	}
+
+	public List<Card> getCards() {
+		return this.cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
+
+	public Card addCard(Card card) {
+		getCards().add(card);
+		card.setShoppinguser(this);
+
+		return card;
+	}
+
+	public Card removeCard(Card card) {
+		getCards().remove(card);
+		card.setShoppinguser(null);
+
+		return card;
 	}
 
 }
