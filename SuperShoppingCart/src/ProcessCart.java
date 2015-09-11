@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Cart;
+import model.Shoppinguser;
 
 /**
  * Servlet implementation class ProcessCart
@@ -100,9 +101,25 @@ public class ProcessCart extends HttpServlet {
 					subTotal += cart.get(i).getPprice() * cart.get(i).getPquantity();
 				}
 			}
-			msg += "<tr><td colspan=\"3\" align=\"right\">Subtotal: $" + formattedPrice(subTotal) + "</td></tr>";
-			msg += "<tr><td colspan=\"3\" align=\"right\">Tax (6%): $" + formattedPrice(subTotal * 0.06) + "</td></tr>";
-			msg += "<tr><td colspan=\"3\" align=\"right\">Total: $" + formattedPrice(subTotal * 1.06) + "</td></tr></tbody></table></div>";
+			
+			Shoppinguser user = UserDB.selectByEmail((String) session.getAttribute("email"));
+			double credit = user.getCredits();
+			double discounts = 0;
+			if ((credit != 0) && (credit <= subTotal)) {
+				msg += "<tr><td colspan=\"3\" align=\"right\">Discounts: $" + formattedPrice(credit) + "</td></tr>";
+				discounts = credit;
+				credit = 0;
+			} else if ((credit != 0) && (credit > subTotal)) {
+				msg += "<tr><td colspan=\"3\" align=\"right\">Discounts: $" + formattedPrice(subTotal) + "</td></tr>";
+				discounts = subTotal;
+				credit -= discounts;
+			}
+			user.setCredits(credit);
+			UserDB.update(user);
+			
+			msg += "<tr><td colspan=\"3\" align=\"right\">Subtotal: $" + formattedPrice(subTotal - discounts) + "</td></tr>";
+			msg += "<tr><td colspan=\"3\" align=\"right\">Tax (6%): $" + formattedPrice((subTotal - discounts) * 0.06) + "</td></tr>";
+			msg += "<tr><td colspan=\"3\" align=\"right\">Total: $" + formattedPrice((subTotal - discounts) * 1.06) + "</td></tr></tbody></table></div>";
 		}
 		return msg;
 	}

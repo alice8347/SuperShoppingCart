@@ -42,8 +42,8 @@ public class CartDB {
 		String query = "SELECT c FROM Cart c WHERE c.shoppinguser.email = '" + email + "'";
 		TypedQuery<Cart> q = em.createQuery(query, Cart.class);
 		try {
-			List<Cart> user = q.getResultList();
-			return user;
+			List<Cart> cart = q.getResultList();
+			return cart;
 		} catch (Exception e) {
 			return null;
 		} finally {
@@ -56,8 +56,8 @@ public class CartDB {
 		String query = "SELECT c FROM Cart c WHERE c.ordered = " + ordered;
 		TypedQuery<Cart> q = em.createQuery(query, Cart.class);
 		try {
-			List<Cart> user = q.getResultList();
-			return user;
+			List<Cart> cart = q.getResultList();
+			return cart;
 		} catch (Exception e) {
 			return null;
 		} finally {
@@ -70,8 +70,8 @@ public class CartDB {
 		String query = "SELECT c FROM Cart c WHERE c.shoppinguser.email = '" + email + "' AND c.ordered = " + ordered;
 		TypedQuery<Cart> q = em.createQuery(query, Cart.class);
 		try {
-			List<Cart> user = q.getResultList();
-			return user;
+			List<Cart> cart = q.getResultList();
+			return cart;
 		} catch (Exception e) {
 			return null;
 		} finally {

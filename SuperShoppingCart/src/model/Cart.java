@@ -29,10 +29,17 @@ public class Cart implements Serializable {
 
 	private int pquantity;
 
+	private String shipaddress;
+
 	//bi-directional many-to-one association to Shoppinguser
 	@ManyToOne
 	@JoinColumn(name="USERID")
 	private Shoppinguser shoppinguser;
+
+	//bi-directional many-to-one association to Card
+	@ManyToOne
+	@JoinColumn(name="CARDID")
+	private Card card;
 
 	public Cart() {
 	}
@@ -93,12 +100,28 @@ public class Cart implements Serializable {
 		this.pquantity = pquantity;
 	}
 
+	public String getShipaddress() {
+		return this.shipaddress;
+	}
+
+	public void setShipaddress(String shipaddress) {
+		this.shipaddress = shipaddress;
+	}
+
 	public Shoppinguser getShoppinguser() {
 		return this.shoppinguser;
 	}
 
 	public void setShoppinguser(Shoppinguser shoppinguser) {
 		this.shoppinguser = shoppinguser;
+	}
+
+	public Card getCard() {
+		return this.card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
 	}
 
 }
